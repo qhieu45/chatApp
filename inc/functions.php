@@ -5,6 +5,8 @@ function get_messages($userOneId = null, $userTwoId = null) {
 		$sql = "SELECT username, chatMessage 
 				FROM users
 				JOIN messages ON messages.userOneId = users.userId
+				WHERE (messages.userOneId = '$userOneId' AND messages.userTwoId = '$userTwoId')
+					OR (messages.userOneId = '$userTwoId' AND messages.userTwoId = '$userOneId')
 				ORDER BY messageId
 				LIMIT 20;";
 		$results = $db->prepare($sql);
@@ -14,6 +16,32 @@ function get_messages($userOneId = null, $userTwoId = null) {
 	}
 	$messages = $results->fetchAll();
 	return $messages;
+}
+
+function send_message($userOneId, $userTwoId, $message) {
+	include("connection.php");
+	$message = addslashes($message);
+	try {
+		$sql = "INSERT INTO messages(userOneId, userTwoId, chatMessage) 
+				VALUES ('$userOneId', '$userTwoId', '$message');";
+		$db->query($sql);
+	} catch (Exception $e) {
+		echo $e->getMessage();
+		echo "Bad query";
+	}
+}
+
+function list_all_users() {
+	include("connection.php");
+	try {
+		$sql = "SELECT userId, username FROM users";
+		$results = $db->prepare($sql);
+		$results->execute();
+	} catch (Exception $e) {
+		echo $e->getMessage();
+	}
+	$allusers = $results->fetchAll();
+	return $allusers;
 }
 
 function create_new_user($user, $password) {
@@ -31,32 +59,21 @@ function create_new_user($user, $password) {
 	}
 }
 
-function send_message($userOneId, $userTwoId, $message) {
-	include("connection.php");
-	$message = addslashes($message);
+function login($username, $password) {
+	include ("connection.php");
 	try {
-		$sql = "INSERT INTO messages(userOneId, userTwoId, chatMessage) 
-				VALUES ('$userOneId', '$userTwoId', '$message');";
-		if ($db->query($sql)) {
-			echo "<script type= 'text/javascript'>alert('Message sent!');</script>";
-		} else{
-			echo "<script type= 'text/javascript'>alert('Problems Occured. Please contact admin!');</script>";
+		$sql = "SELECT username FROM users WHERE username='$username' AND password = '$password'";
+		$result = $db->query($sql);
+		$row = $result->fetch(PDO::FETCH_ASSOC);
+		$count = count($row);
+		if ($count == 1) {
+			$_SESSION['loggedin']=$username;
+			header("location: chat-box.php");
+		} else {
+			echo "Username or Password is invalid";
 		}
 	} catch (Exception $e) {
-		echo $e->getMessage();
-		echo "Bad query";
+		echo $e-> getMessage();
+		echo "Please try again";
 	}
-}
-
-function list_all_users() {
-	include("connection.php");
-	try {
-		$sql = "SELECT username FROM users";
-		$results = $db->prepare($sql);
-		$results->execute();
-	} catch (Exception $e) {
-		echo $e->getMessage();
-	}
-	$allusers = $results->fetchAll();
-	return $allusers;
 }
