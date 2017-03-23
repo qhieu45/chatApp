@@ -12,8 +12,6 @@ try {
 			$username = filter_var($_POST["username"],FILTER_SANITIZE_STRING);
 			$password = filter_var($_POST["password"], FILTER_SANITIZE_STRING);
 			login($username, $password);
-			echo $username;
-			echo $password;
 		}
 	}
 } catch (Exception $e) {
@@ -29,4 +27,6 @@ try {
 			<input type="password" name="password" id="password" required="required" /> </br>
 			<input type="submit" value="Sign In" name="submit" /> </br>
 </form>
+<a href="signup.php">SIGN UP NOW</a>
+
 <span><?php echo $error?></span>

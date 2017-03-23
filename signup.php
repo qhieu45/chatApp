@@ -23,6 +23,7 @@
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
+		
 	?>
 	<form action="" method="post">
 		</br> <p>Please enter your username and password below: </p>

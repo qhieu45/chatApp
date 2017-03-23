@@ -2,13 +2,13 @@
 function get_messages($userOneId = null, $userTwoId = null) {
 	include("connection.php");
 	try {
-		$sql = "SELECT username, chatMessage 
+		$sql = "SELECT *
 				FROM users
 				JOIN messages ON messages.userOneId = users.userId
 				WHERE (messages.userOneId = '$userOneId' AND messages.userTwoId = '$userTwoId')
 					OR (messages.userOneId = '$userTwoId' AND messages.userTwoId = '$userOneId')
 				ORDER BY messageId
-				LIMIT 20;";
+				LIMIT 10;";
 		$results = $db->prepare($sql);
 		$results->execute();
 	} catch (Exception $e) {
@@ -65,8 +65,7 @@ function login($username, $password) {
 		$sql = "SELECT username FROM users WHERE username='$username' AND password = '$password'";
 		$result = $db->query($sql);
 		$row = $result->fetch(PDO::FETCH_ASSOC);
-		$count = count($row);
-		if ($count == 1) {
+		if ($row['username'] == $username) {
 			$_SESSION['loggedin']=$username;
 			header("location: chat-box.php");
 		} else {
@@ -77,3 +76,45 @@ function login($username, $password) {
 		echo "Please try again";
 	}
 }
+
+function show_message_of_two_users($userOneId, $userTwoId) {
+	$messages = get_messages($userOneId, $userTwoId);
+	foreach($messages as $message) {
+		echo "<p> {$message['username']}:" . htmlspecialchars($message['chatMessage']) ."</p>";
+	}
+}
+
+
+
+
+/////////// NEEDED LATER
+// function to write chat log between two users into a new file
+// with the new file, we can use filemtime to check the last time file was modified
+// so we can get realtime update on the chatlog between two users
+/* function write_chat_to_file($userOneId, $userTwoId) {
+	try {
+	$chatlogfile = fopen("data/chatlog$userOneId$userTwoId.json", "w");
+	$messages = get_messages($userOneId, $userTwoId);
+	foreach($messages as $message) {
+		$messagetowrite = $message['username'] . ': ' . $message['chatMessage'] . "\r\n"; 
+		fwrite($chatlogfile, $messagetowrite);
+	}
+	fclose($chatlogfile);
+	} catch (Exception $e) {
+		echo $e->getMessage();
+	}
+} */
+
+// not needed anymore
+/* // infinite loop until the data is not modified
+function check_update($chatlogfile) {
+	$lastmodif = isset($_GET['timestamp']) ? $_GET['timestamp'] : 0;
+	$currentmodif = filemtime($chatlogfile);
+	
+	//return a json array
+	$response = array();
+	$response['msg'] = file_get_contents($chatlogfile);
+	$response['timestamp'] = $currentmodif;
+	echo json_encode($response);
+	flush();
+} */
