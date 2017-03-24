@@ -7,7 +7,7 @@ function get_messages($userOneId = null, $userTwoId = null) {
 				JOIN messages ON messages.userOneId = users.userId
 				WHERE (messages.userOneId = '$userOneId' AND messages.userTwoId = '$userTwoId')
 					OR (messages.userOneId = '$userTwoId' AND messages.userTwoId = '$userOneId')
-				ORDER BY messageId
+				ORDER BY messageId DESC
 				LIMIT 10;";
 		$results = $db->prepare($sql);
 		$results->execute();
@@ -31,10 +31,12 @@ function send_message($userOneId, $userTwoId, $message) {
 	}
 }
 
-function list_all_users() {
+function list_all_users($currentUser) {
 	include("connection.php");
 	try {
-		$sql = "SELECT userId, username FROM users";
+		$sql = "SELECT userId, username FROM users
+				WHERE NOT userId = '$currentUser'
+				";
 		$results = $db->prepare($sql);
 		$results->execute();
 	} catch (Exception $e) {
@@ -79,7 +81,10 @@ function login($username, $password) {
 
 function show_message_of_two_users($userOneId, $userTwoId) {
 	$messages = get_messages($userOneId, $userTwoId);
-	foreach($messages as $message) {
+	array_reverse($messages);
+	// reverse message to display last message at the end
+	$messages_reverse = array_reverse($messages);
+	foreach($messages_reverse as $message) {
 		echo "<p> {$message['username']}:" . htmlspecialchars($message['chatMessage']) ."</p>";
 	}
 }

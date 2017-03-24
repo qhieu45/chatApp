@@ -43,7 +43,7 @@
 			Chat messages with 	<select name="userTwo" id="otherUsers" onchange="showMess(this.value)">
 			<?php 
 			echo "<option value=''>"."Select a person:</option>";
-				$allusers = list_all_users();
+				$allusers = list_all_users($loggedinUserId);
 				foreach($allusers as $user) {
 					// put the userId of userTwo into the value of <option> --> later used for POST
 					echo "<option value=". $user['userId'] ;
