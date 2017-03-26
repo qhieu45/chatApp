@@ -23,6 +23,7 @@
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
+		
 	?>
 	<div class="signUpForm">
 		<form action="" method="post">

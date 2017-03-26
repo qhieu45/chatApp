@@ -15,6 +15,9 @@
 		session_start();
 		// sessioncheck should be equal to the name of the user who logged in
 		$sessioncheck = $_SESSION['loggedin'];
+		if (empty($sessioncheck)) {
+			header('location: login.php');
+		}
 		// getting username from the session
 		$result = $db->query("SELECT * from users WHERE username = '$sessioncheck'");
 		$row = $result->fetch(PDO::FETCH_ASSOC);
@@ -29,24 +32,25 @@
 			$message = $_POST["message"];
 			$userTwoId = $_POST['userTwo'];
 			send_message($loggedinUserId, $userTwoId, $message);
-			
-			$messages = get_messages($loggedinUserId, $userTwoId);
-			foreach($messages as $message) {
-				echo "<p> {$message['username']}:" . htmlspecialchars($message['chatMessage']) ."</p>";
-			}
 		}
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
 	?>
 	<div id="chatarea" class="chatarea">
-		<form action="" method="post">
+		<form id="submitchat" action="" method="post">
 			<p>
-			Chat messages with <select name="userTwo" id="otherUsers">
-			<?php $allusers = list_all_users();
+			Chat messages with 	<select name="userTwo" id="otherUsers" onchange="showMess(this.value)">
+			<?php 
+			echo "<option value=''>"."Select a person:</option>";
+				$allusers = list_all_users($loggedinUserId);
 				foreach($allusers as $user) {
 					// put the userId of userTwo into the value of <option> --> later used for POST
-					echo "<option value=". $user['userId']. "> {$user['username']}"."</option>";
+					echo "<option value=". $user['userId'] ;
+					// keeping the selected option after submit form
+					if(isset($_POST['userTwo']) && $_POST['userTwo'] == $user['userId'])
+						echo ' selected="selected"';
+					echo "> {$user['username']}"."</option>";
 				}
 			?>
 			</select>
@@ -54,15 +58,49 @@
 			<input type="text" name="message" id="message" required="required" /> <br>
 			<input type="submit" value="Send message" name="submit" /> <br>
 		</form>
-		<?php
-/* 			$messages = get_messages($loggedinUserId, $userTwoId);
-			foreach($messages as $message) {
-				echo "<p> {$message['username']}:" . htmlspecialchars($message['chatMessage']) ."</p>";
-			} */
-		?>
 	</div>
-	
+	<div id="chatlog">
+	</div>
 	<a href="logout.php">Log Out</a>
 </body>
 
+<script>
+	function showMess(str) {
+    if (str.length == 0) { 
+        document.getElementById("chatlog").innerHTML = "";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("chatlog").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "inc/chat_backend.php?q=" + str, true);
+        xmlhttp.send();
+    }
+}	
+	function refreshChat(str) {
+		if (str.length == 0) { 
+	        document.getElementById("chatlog").innerHTML = "";
+	        return;
+	    } else {
+	        var xmlhttp = new XMLHttpRequest();
+	        xmlhttp.onreadystatechange = function() {
+	            if (this.readyState == 4 && this.status == 200) {
+	                document.getElementById("chatlog").innerHTML = this.responseText;
+	            }
+	        };
+	        xmlhttp.open("GET", "inc/chat_backend.php?q=" + str, true);
+	        xmlhttp.send();
+	    }
+	    console.log("Test Interval");
+	}
+	setInterval(function() {
+		refreshChat($('#otherUsers').val());
+		}, 1000);
+</script>
+
 </html>
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
