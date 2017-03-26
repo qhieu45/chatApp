@@ -3,3 +3,90 @@
     height:200px;
     /* overflow:scroll; */
 }
+
+/***************Sign In, Sign Up pages***********/
+
+.signUpForm, .signInForm {	
+	margin: 0 auto;
+	margin-top: 15px;
+	margin-left: 15%;
+	width: 300px;
+	height: 220px;
+	background: #fff;
+	border-radius: 5px; 
+	text-align: center;
+	padding-top: 1px;
+	box-shadow: 0 0 10px rgba(0,0,0, .5);
+	transform: translate(50%,50%);
+}
+
+.username {
+	border: 1px solid #a6a6a6;
+	width: 230px;
+	height: 40px;
+	border-radius: 3px;
+	margin-top: 25px;
+	padding-left: 9px;
+	color: #6c6c6c;
+	background: #fcfcfc;
+	outline: none;
+}
+
+.password {
+	border: 1px solid #a6a6a6;
+	width: 230px;
+	height: 40px;
+	border-radius: 3px;
+	margin-top: 5px;
+  	margin-right: 3px;
+	padding-left: 9px;
+	color: #6c6c6c;
+	background: #fcfcfc;
+	outline: none;
+}
+
+.password:hover, .username:hover {
+	box-shadow: 0 0 10px rgba(178,34,34, 1); 
+	border: 1px #b22222	 solid ;
+}
+
+.password:focus, .username:focus, .button:focus, .button:hover:focus{
+	box-shadow: 0 0 10px rgba(178,34,34, 1); 
+	border: 1px #b22222	 solid ;
+}
+
+.button {
+	color:#fff;
+	font-size:20px;
+	border: 1px solid #a6a6a6;
+	width: 110px;
+	height: 43px;
+	border-radius: 5px;
+	margin-top: 5px;
+	margin-right: 6px;
+	outline: none;
+	background: -moz-linear-gradient(top,  rgb(255,48,25) 0%, rgb(207,4,4) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(255,48,25)), color-stop(100%,rgb(207,4,4))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgb(255,48,25) 0%,rgb(207,4,4) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgb(255,48,25) 0%,rgb(207,4,4) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgb(255,48,25) 0%,rgb(207,4,4) 100%); /* IE10+ */
+}
+
+  
+.button:hover{
+	background: -moz-linear-gradient(top,  rgb(204,0,0) 0%, rgb(204,0,0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(204,0,0)), color-stop(100%,rgb(204,0,0))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgb(204,0,0) 0%,rgb(204,0,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgb(204,0,0) 0%,rgb(204,0,0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgb(204,0,0) 0%,rgb(204,0,0) 100%); /* IE10+ */
+}
+
+label {
+	position: relative;
+	top: 5px;
+	margin-right: 115px;
+	}
+label span {
+	margin-left: 5px;
+	font-size:14px;
+}

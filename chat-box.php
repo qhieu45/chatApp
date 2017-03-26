@@ -65,10 +65,4 @@
 	<a href="logout.php">Log Out</a>
 </body>
 
-<script>
-	$("#otherUsers").change(function(){
-		console.log($("#otherUsers").val());
-	})
-</script>
-
 </html>
