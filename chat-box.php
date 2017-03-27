@@ -80,7 +80,6 @@
         xmlhttp.send();
     }
 }	
-
 	function refreshChat(str) {
 		if (str.length == 0) { 
 	        document.getElementById("chatlog").innerHTML = "";
@@ -97,11 +96,11 @@
 	    }
 	    console.log("Test Interval");
 	}
-
 	setInterval(function() {
 		refreshChat($('#otherUsers').val());
 		}, 1000);
-
 </script>
 
 </html>
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
