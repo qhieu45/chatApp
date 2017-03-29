@@ -1,7 +1,17 @@
-.chatarea{
-    width:500px;
-    height:200px;
-    /* overflow:scroll; */
+#container{
+	margin: 10% auto;
+}
+#submitchat{
+	margin-bottom: 50px;
+}
+.chatlog{
+	margin-top: 50px;
+	width:500px;
+    height:400px;
+    overflow-y:scroll; 
+}
+#message{
+	width: 50%;
 }
 
 /***************Sign In, Sign Up pages***********/
@@ -89,4 +99,13 @@ label {
 label span {
 	margin-left: 5px;
 	font-size:14px;
+}
+
+
+/***********************Chat Box*************************/
+
+.oneUser{
+	width: 100px;
+	height: 100px;
+	border: 1px solid black;
 }
