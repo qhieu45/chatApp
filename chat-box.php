@@ -42,7 +42,27 @@
 	<div id="container">
 		<!--<div id="chatarea" class="chatarea">-->
 		<div class="col-lg-3 col-md-3 col-xs-3">
-			
+			<form id="submitchat" action="" method="post">
+			<ul name="userTwo" id="otherUsers" onchange="showMess(this.value)">
+				<?php 
+					$allusers = list_all_users($loggedinUserId);
+					foreach($allusers as $user) {
+						// put the userId of userTwo into the value of <option> --> later used for POST
+						echo "<li class='oneUser'>" ;
+						// keeping the selected option after submit form
+						// if(isset($_POST['userTwo']) && $_POST['userTwo'] == $user['userId'])
+						// 	echo ' selected="selected"';
+						echo "<input type='hidden' value='". $user['username'] ."'/> {$user['username']}"."</li>";
+					}
+				?>
+			<input type="text" name="message" id="message" required="required" /> <br>
+			<input type="submit" value="Send message" name="btnsubmit" /> <br>
+			 <?php
+            if( $_SERVER['REQUEST_METHOD']=='POST' && isset( $_POST['userTwo'] ) ){
+                echo 'Test: '.$_POST['userTwo'];
+            }
+        ?>
+		</form>
 
 				
 
@@ -80,7 +100,7 @@
 
 <script>
 	function searchMessage(str){
-		return new Promise(function (resolve, reject){
+		return new Promise( (resolve, reject) => {
 			if (str.length == 0) { 
 				document.getElementById("chatlog").innerHTML = "";
 				resolve();
