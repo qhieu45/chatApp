@@ -26,7 +26,6 @@
 		// save the userId of the user who logged in, which can then be used as userOneId
 		$loggedinUserId = $row['userId'];
 		$userTwoId = '';
-		echo "Hello {$row['username']}, welcome to chatbox";
 	?>
 	<?php 
 		try {
@@ -41,10 +40,14 @@
 	?>
 	<div id="container">
 		<!--<div id="chatarea" class="chatarea">-->
-		<div class="col-lg-3 col-md-3 col-xs-3">
-			
+		<div class="col-lg-4 col-md-4 col-xs-4">
+			<h3>
+			<?php
+				echo "Hello {$row['username']}, welcome to chatbox"
+			?>
+			</h3>
 		</div>
-		<div class="col-lg-6 col-md-6 col-xs-6">
+		<div class="col-lg-4 col-md-4 col-xs-4 chat-area">
 				
 			<form id="submitchat" action="" method="post">
 				<p>
@@ -69,8 +72,9 @@
 				<input type="submit" value="Send message" name="btnsubmit" /> <br>
 			</form>
 			<!--</div>-->
-		<a href="logout.php">Log Out</a>
 		</div>
+		
+		<a class="btn-log-out" href="logout.php">Log Out</a>
 	</div>
 </body>
 
