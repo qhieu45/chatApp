@@ -31,7 +31,6 @@
 			<input type="password" class="password" name="password" id="password" placeholder="Password" required="required" /> <br>
 			<input type="password" class="password" name="passwordconfirm" id="passwordconfirm" placeholder="Confirm Password" required="required" /> </br>
 			<input type="submit" class="button" value="Sign Up" name="submit" /> 
-			<a href="login.php"><input type="button" class="button" value="Sign In"/></a><br>
 		</form>
 	</div>
 </body>

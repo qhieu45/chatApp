@@ -31,7 +31,8 @@ try {
 			<input type="text" class="username" name="username" id="username" placeholder="Username" required="required" /> <br>
 			<input type="password" class="password" name="password" id="password" placeholder="Password" required="required" /> <br>
 			<input type="submit" class="button" value="Sign In" name="submit" /> 
-			<a href="login.php"><input type="button" class="button" value="Sign Up"/></a><br>
+			<input type="button" class="button" id="signup" value="Sign Up"/>
+			<br>
 			<label>
 				<input type="checkbox" value="Remember me" class="checkbox"/> <span>Remember me</span>
 			</label>
@@ -40,5 +41,11 @@ try {
 <span><?php echo $error?></span>
 
 </body>
+<script>
+	const signup = document.getElementById("signup");
+	signup.addEventListener("click", function() {
+		window.location.href = "signup.php";
+		});
+</script>
 </html>
 
