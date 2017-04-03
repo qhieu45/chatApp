@@ -84,9 +84,7 @@ function show_message_of_two_users($userOneId, $userTwoId) {
 	array_reverse($messages);
 	// reverse message to display last message at the end
 	$messages_reverse = array_reverse($messages);
-	foreach($messages_reverse as $message) {
-		echo "<p> {$message['username']}:" . htmlspecialchars($message['chatMessage']) ."</p>";
-	}
+	echo json_encode(array_values($messages_reverse));
 }
 
 
