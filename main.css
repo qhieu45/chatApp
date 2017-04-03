@@ -1,17 +1,29 @@
 #container{
-	margin: 10% auto;
+	margin: 100px auto;
 }
 #submitchat{
 	margin-bottom: 50px;
 }
+
+.chat-area{
+	padding: 70px !important;
+    margin: 20px;
+    border: 1px solid black;
+    background: #ccffff;
+}
+
 .chatlog{
 	margin-top: 50px;
-	width:500px;
     height:400px;
-    overflow-y:scroll; 
+    overflow-y:auto; 
 }
 #message{
-	width: 50%;
+	width: 60%;
+}
+
+.btn-log-out{
+	float: right;
+    margin: 30px;
 }
 
 /***************Sign In, Sign Up pages***********/
