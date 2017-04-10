@@ -5,27 +5,6 @@
 	margin-bottom: 50px;
 }
 
-.chat-area{
-	padding: 70px !important;
-    margin: 20px;
-    border: 1px solid black;
-    background: #ccffff;
-}
-
-.chatlog{
-	margin-top: 50px;
-    height:400px;
-    overflow-y:auto; 
-}
-#message{
-	width: 60%;
-}
-
-.btn-log-out{
-	float: right;
-    margin: 30px;
-}
-
 /***************Sign In, Sign Up pages***********/
 
 .signUpForm, .signInForm {	
@@ -114,10 +93,122 @@ label span {
 }
 
 
-/***********************Chat Box*************************/
+/***********************User Lists*************************/
 
-.oneUser{
-	width: 100px;
-	height: 100px;
-	border: 1px solid black;
+#otherUsers li{
+	border-bottom: 1px solid #ccc;
+	display: table;
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 2px;
+}
+.inner {
+  display: table-row;
+  overflow: hidden;
+}
+.li-img {
+  display: table-cell;
+  vertical-align: middle;
+  width: 30%;
+  padding-right: 1em;
+}
+.li-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.li-text {
+  display: table-cell;
+  vertical-align: middle;
+  width: 70%;
+}
+.li-head {
+  margin: 0;
+}
+.li-sub {
+  margin: 0;
+}
+
+
+
+/************************Chat Area**********************/
+.chat-area{
+	padding: 70px !important;
+    margin: 20px;
+}
+
+.chatlog{
+	font:12px Trebuchet MS;
+	margin:auto auto;
+}
+
+
+.chatlog ul{
+	margin:0;
+	padding:0;
+	border-bottom:2px solid #9c9c9c;
+	padding-bottom:15px;
+	margin-bottom:15px;
+}
+
+
+.chatlog ul li{
+	width:100%;
+	list-style-type:none;
+	margin:5px 0;
+	position:relative;
+	display:inline-block;
+}
+
+.chatlog ul li img{
+	height: 64px;
+	width:64px;
+	float:left;
+	border-radius:50px;
+	box-shadow:0 2px 15px rgba(0,0,0,.5);
+}
+.chatlog ul li .message{
+	margin-left:90px;
+	background:blue;
+	position:relative;
+	min-height:25px;
+	margin-top:35px;
+	padding:10px;
+	box-sizing:border-box;
+   
+}
+
+
+.chatlog ul li:nth-child(odd) img{
+	float:right;
+}
+
+.chatlog ul li:nth-child(odd) .message{
+	margin-right:90px;
+	margin-left:0;
+	background:#def1ff;
+}
+
+
+
+.chatlog ul li:nth-child(even) .message{
+  background:#daffb1;
+}
+
+#message{
+	width: 75%;
+}
+
+
+
+/*******************Right side**********************/
+.welcome{
+	font-family: cursive;
+}
+
+.btn-log-out{
+	color: black;
+	font-family: cursive;
+	float: right;
+    margin: 30px;
 }

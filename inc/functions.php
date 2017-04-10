@@ -1,5 +1,5 @@
 <?php
-function get_messages($userOneId = null, $userTwoId = null) {
+function get_messages($userOneId = null, $userTwoId = null, $limit = 15) {
 	include("connection.php");
 	try {
 		$sql = "SELECT *
@@ -8,7 +8,7 @@ function get_messages($userOneId = null, $userTwoId = null) {
 				WHERE (messages.userOneId = '$userOneId' AND messages.userTwoId = '$userTwoId')
 					OR (messages.userOneId = '$userTwoId' AND messages.userTwoId = '$userOneId')
 				ORDER BY messageId DESC
-				LIMIT 10;";
+				LIMIT $limit;";
 		$results = $db->prepare($sql);
 		$results->execute();
 	} catch (Exception $e) {
@@ -16,6 +16,15 @@ function get_messages($userOneId = null, $userTwoId = null) {
 	}
 	$messages = $results->fetchAll();
 	return $messages;
+}
+
+function show_message_of_two_users($userOneId, $userTwoId, $limit=15) {
+	$messages = get_messages($userOneId, $userTwoId, $limit);
+	//array_reverse($messages);
+	// reverse message to display last message at the end
+	$messages_reverse = array_reverse($messages);
+	// return json_encode(array_values($messages_reverse));
+	return array_values($messages_reverse);
 }
 
 function send_message($userOneId, $userTwoId, $message) {
@@ -77,14 +86,6 @@ function login($username, $password) {
 		echo $e-> getMessage();
 		echo "Please try again";
 	}
-}
-
-function show_message_of_two_users($userOneId, $userTwoId) {
-	$messages = get_messages($userOneId, $userTwoId);
-	array_reverse($messages);
-	// reverse message to display last message at the end
-	$messages_reverse = array_reverse($messages);
-	echo json_encode(array_values($messages_reverse));
 }
 
 

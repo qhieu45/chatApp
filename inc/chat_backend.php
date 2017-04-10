@@ -20,7 +20,7 @@ $row = $result->fetch(PDO::FETCH_ASSOC);
 $loggedinUserId = $row['userId'];
 
 $q = intval($_GET['q']);
-$messages_between_users = show_message_of_two_users($loggedinUserId, $q);
+echo json_encode(show_message_of_two_users($loggedinUserId, $q));
 
 // lookup all hints from array if $q is different from ""
 
