@@ -1,13 +1,9 @@
-<html lang="en">
-
-<head>
-	<title>Sign Up here</title>
-	<link href='main.css' rel='stylesheet' type="text/css"> 
-</head>
-
-<body>
 <?php
-include ('inc/functions.php');
+	$my_title = "Login";
+	include 'header.php';
+?>
+<?php
+include ('../inc/functions.php');
 session_start();
 $error = '';
 try {
