@@ -18,12 +18,17 @@ $result = $db->query("SELECT * from users WHERE username = '$sessioncheck'");
 $row = $result->fetch(PDO::FETCH_ASSOC);
 // save the userId of the user who logged in, which can then be used as userOneId
 $loggedinUserId = $row['userId'];
-$q = intval($_GET['q']);
 
-$messages = get_messages($loggedinUserId, $q);
-$messages_reverse = array_reverse($messages);
-echo json_encode(array_values($messages_reverse));
-
+$users = list_all_users($loggedinUserId);
+foreach($users as &$user){
+	$last_message = show_message_of_two_users($loggedinUserId, $user["userId"], 1);
+	if ($last_message){
+		$user["lastMessage"] = $last_message[0]["chatMessage"];
+	} else {
+		$user["lastMessage"] = "";
+	}
+}
+echo json_encode($users);
 // lookup all hints from array if $q is different from ""
 
 

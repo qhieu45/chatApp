@@ -1,13 +1,9 @@
-<html lang="en">
-
-<head>
-	<title>Sign Up here</title>
-	<link href='main.css' rel='stylesheet' type="text/css"> 
-</head>
-
-<body>
 <?php
-include ('inc/functions.php');
+	$my_title = "Login";
+	include 'header.php';
+?>
+<?php
+include ('../inc/functions.php');
 session_start();
 $error = '';
 try {
@@ -33,9 +29,9 @@ try {
 			<input type="submit" class="button" value="Sign In" name="submit" /> 
 			<input type="button" class="button" id="signup" value="Sign Up"/>
 			<br>
-			<label>
+			<!--<label>
 				<input type="checkbox" value="Remember me" class="checkbox"/> <span>Remember me</span>
-			</label>
+			</label>-->
 	</form>
 </div>
 <span><?php echo $error?></span>

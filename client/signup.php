@@ -1,13 +1,9 @@
-<html lang="en">
-
-<head>
-	<title>Sign Up here</title>
-	<link href='main.css' rel='stylesheet' type="text/css"> 
-</head>
-
-<body>
+<?php
+	$my_title = "Sign Up";
+	include 'header.php';
+?>
 	<?php 
-		include ('inc/functions.php');
+		include ('../inc/functions.php');
 		try {
 		if (isset($_POST["submit"])) {
 			$user = filter_var($_POST["username"],FILTER_SANITIZE_STRING);
